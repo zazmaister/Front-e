@@ -10,7 +10,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from './common/common.module';
 import { EditMatchComponent } from './common/edit-match/edit-match.component';
 import { MatchesComponent } from './common/matches/matches.component';
-import { MatchService } from './match.service';
 
 const appRoutes: Routes = [
   { path: 'matches/edit/:id', component: EditMatchComponent },
@@ -37,7 +36,7 @@ const appRoutes: Routes = [
     SharedModule
 
   ],
-  providers: [ ApiService, MatchService ],
+  providers: [ ApiService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -10,7 +10,7 @@ import { MatchService } from '../../match.service';
   styleUrls: ['./matches.component.scss']
 })
 export class MatchesComponent implements OnInit {
-  private loading = false;
+  loading = false;
   private calledFirst = false;
   results: Match[];
 
@@ -22,17 +22,16 @@ export class MatchesComponent implements OnInit {
       console.log('AAAAAAA');
       this.getData();
     } else {
+      this.loading = true;
       this.results = this.apiService.getMatches();
       console.log('AAAAAAAB');
     }
   }
 
   getData() {
-    this.loading = true;
     if (!this.results) {
       this.apiService.get20Matches().subscribe( data => {
-        this.calledFirst = true;
-        this.loading = false;
+        this.loading = true;
         this.results = data;
         this.apiService.setMatches(this.results);
       });

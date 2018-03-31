@@ -4,7 +4,6 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { Input } from '@angular/core/src/metadata/directives';
 import { Match } from '../../match';
-import { MatchService } from '../../match.service';
 import { Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { ApiService } from '../../api.service';
