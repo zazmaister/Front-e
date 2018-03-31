@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>Date/Time</th>
+      <th>Teams</th>
+      <th>Sport</th>
+      <th>Category</th>
+      <th>Tournament</th>
+      <th>Final result</th>
+      <th>Period</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let match of results">
+      <td>{{match.date + ' ' + match.time}}</td>
+      <td>{{match.homeTeam + ' - ' + match.awayTeam}}</td>
+      <td>{{match.sport}}</td>
+      <td>{{match.category}}</td>
+      <td>{{match.tournament}}</td>
+      <td>{{match.finalResultHome + ':' + match.finalResultAway}}</td>
+      <td>
+        <div *ngFor="let period of match.periods">{{ period[0] + ':' + period[1]}}</div>
+      </td>
+      <td>
+          <div [routerLink]="['edit', match.id]" (click)="setCurrent(match.id)"><i class="far fa-edit"></i></div>
+      </td>
+    </tr>
+  </tbody>
+</table>

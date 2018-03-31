@@ -6,15 +6,38 @@ import { AppComponent } from './app.component';
 import { ApiService } from './api.service';
 import { HttpModule } from '@angular/http';
 
+import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from './common/common.module';
+import { EditMatchComponent } from './common/edit-match/edit-match.component';
+import { MatchesComponent } from './common/matches/matches.component';
+import { MatchService } from './match.service';
+
+const appRoutes: Routes = [
+  { path: 'matches/edit/:id', component: EditMatchComponent },
+  {
+    path: 'matches',
+    component: MatchesComponent
+  },
+  { path: '',
+    redirectTo: '/matches',
+    pathMatch: 'full'
+  }
+];
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot(
+      appRoutes
+    ),
+    SharedModule
+
   ],
-  providers: [ ApiService ],
+  providers: [ ApiService, MatchService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

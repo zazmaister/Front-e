@@ -1,0 +1,78 @@
+<div class="edit-form" #divForm>
+  <div class="edit-form__header">
+    <div>Hero Detail</div>
+    <div (click)="back()">Close &nbsp;<i class="fas fa-times"></i></div>
+  </div>
+  <div class="edit-form__body">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+
+      <div class="row">
+          <label class="col-md-4">Home team:</label>
+          <input class="col-md-7 form-input" type="text" formControlName="homeTeam">
+      </div>
+      <div class="row">
+          <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['homeTeam'].valid && (editForm.controls['homeTeam'].touched || editForm.controls['homeTeam'].dirty)">Home team name is required.</div>
+      </div>
+
+
+      <div class="row">
+        <label class="col-md-4">Away team:</label>
+        <input class="col-md-7 form-input" type="text" formControlName="awayTeam">
+      </div>
+      <div class="row">
+        <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['awayTeam'].valid && (editForm.controls['awayTeam'].touched || editForm.controls['awayTeam'].dirty)">Away team name is required.</div>
+      </div>
+
+
+      <div class="row">
+        <label class="col-md-4">Sport:</label>
+        <input class="col-md-7 form-input" type="text" formControlName="sport">
+      </div>
+      <div class="row">
+        <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['sport'].valid && (editForm.controls['sport'].touched || editForm.controls['sport'].dirty)">Sport field is required.</div>
+      </div>
+
+
+      <div class="row">
+        <label class="col-md-4">Tournament:</label>
+        <input class="col-md-7 form-input" type="text" formControlName="tournament">
+      </div>
+      <div class="row">
+        <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['tournament'].valid && (editForm.controls['tournament'].touched || editForm.controls['tournament'].dirty)">Tournament field is required.</div>
+      </div>
+
+
+      <div class="row">
+        <label class="col-md-4">Category:</label>
+        <input class="col-md-7 form-input" type="text" formControlName="category">
+      </div>
+      <div class="row">
+        <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['category'].valid && (editForm.controls['category'].touched || editForm.controls['category'].dirty)">Category field is required.</div>
+      </div>
+
+
+      <div class="row">
+        <label class="col-md-4">Final result home:</label>
+        <input class="col-md-7 form-input" type="number" formControlName="finalResultHome">
+      </div>
+      <div class="row">
+        <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['finalResultHome'].valid && (editForm.controls['finalResultHome'].touched || editForm.controls['finalResultHome'].dirty)">Final home result field is required.</div>
+      </div>
+
+
+      <div class="row">
+        <label class="col-md-4">Final result away:</label>
+        <input class="col-md-7 form-input" type="number" formControlName="finalResultAway">
+      </div>
+      <div class="row">
+        <div class="alert-danger alert-custom col-md-7 offset-md-4" role="alert" *ngIf="!editForm.controls['finalResultAway'].valid && (editForm.controls['finalResultAway'].touched || editForm.controls['finalResultAway'].dirty)">Final away result is required.</div>
+      </div>
+
+      <div class="row"></div>
+        <div class= "action-buttons col-md-8 offset-md-4">
+          <button (click)="back()">Cancel</button>
+          <button type="submit">Save</button>
+        </div>
+    </form>
+  </div>
+</div>

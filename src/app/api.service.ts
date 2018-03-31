@@ -11,6 +11,8 @@ import { Match } from './match';
 export class ApiService {
 
   private _getURL = './assets/mockFile.json';
+  private matches: Match[];
+  private currentMatch: Match;
 
   constructor(private http: Http) {
   }
@@ -31,6 +33,7 @@ export class ApiService {
                   array = [
                     ...array,
                     new Match({
+                      id: data[i].realcategories[j].tournaments[k].matches[l]._id,
                       date: data[i].realcategories[j].tournaments[k].matches[l]._dt.date,
                       time: data[i].realcategories[j].tournaments[k].matches[l]._dt.time,
                       homeTeam: data[i].realcategories[j].tournaments[k].matches[l].teams.home.name,
@@ -48,12 +51,14 @@ export class ApiService {
                 }
 
                 if (count === 20) {
+                  this.matches = array;
                   return array;
                 }
               }
             }
           }
         }
+        this.matches = array;
         return array;
       })
       .catch(this.handleError);
@@ -77,6 +82,30 @@ export class ApiService {
       }
     });
     return resultByPeriods;
+  }
+
+  public setMatches(matches: Match[]): void {
+    this.matches = matches;
+  }
+
+  public getMatches(): Match[] {
+    return this.matches;
+  }
+  setCurrent(id: number) {
+    const curr = this.matches.filter((match) => {
+      return match.id === id;
+    });
+    this.currentMatch = curr[0];
+  }
+  getCurrent(): Match {
+    return this.currentMatch;
+  }
+
+  public updateMatch(match: Match, id: number) {
+    this.currentMatch = match;
+    const index = this.matches.findIndex(m => m.id === id);
+
+    this.matches[index] = Object.assign({}, this.matches[index], match);
   }
 
 }

@@ -1,5 +1,6 @@
 
 export class Match {
+  id: number;
   date: string;
   time: string;
   homeTeam: string;
@@ -12,6 +13,7 @@ export class Match {
   periods: number[][];
 
   constructor(matchInfo: Match) {
+    this.id = matchInfo.id;
     this.date = matchInfo.date;
     this.time = matchInfo.time;
     this.homeTeam = matchInfo.homeTeam;
