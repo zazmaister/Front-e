@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Match } from '../../match';
-import { MatchService } from '../../match.service';
+
 
 @Component({
   selector: 'app-matches',
@@ -11,7 +11,6 @@ import { MatchService } from '../../match.service';
 })
 export class MatchesComponent implements OnInit {
   loading = false;
-  private calledFirst = false;
   results: Match[];
 
   constructor(private apiService: ApiService) {
@@ -19,12 +18,10 @@ export class MatchesComponent implements OnInit {
 
   ngOnInit() {
     if (this.apiService.getMatches() === undefined) {
-      console.log('AAAAAAA');
       this.getData();
     } else {
       this.loading = true;
       this.results = this.apiService.getMatches();
-      console.log('AAAAAAAB');
     }
   }
 
@@ -37,9 +34,4 @@ export class MatchesComponent implements OnInit {
       });
     }
   }
-
-  setCurrent(id: number) {
-    this.apiService.setCurrent(id);
-  }
-
 }

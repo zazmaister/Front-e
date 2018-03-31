@@ -24,7 +24,7 @@
           <div *ngFor="let period of match.periods">{{ period[0] + ':' + period[1]}}</div>
         </td>
         <td>
-            <div [routerLink]="['edit', match.id]" (click)="setCurrent(match.id)"><i class="far fa-edit"></i></div  >
+            <div [routerLink]="['edit', match.id]"><i class="far fa-edit"></i></div  >
         </td>
       </tr>
     </tbody>

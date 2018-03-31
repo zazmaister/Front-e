@@ -23,8 +23,7 @@ export class ApiService {
         const data  =  response.json().doc[0].data;
         let count = 0, array = [];
         /* I know thats the most ugly piece of code, unfortunately i couldnt
-        find time to find any module or function which provide selection of
-        elements on specific level in json. THIS IS TEMPORARY SOLUTION!!!!*/
+        find better solution. THIS IS TEMPORARY SOLUTION!!!!*/
         for (let i = 0; i < data.length; i++) {
           for (let j = 0; j < data[i].realcategories.length; j++) {
             for (let k = 0; k < data[i].realcategories[j].tournaments.length; k++) {
@@ -91,14 +90,12 @@ export class ApiService {
   public getMatches(): Match[] {
     return this.matches;
   }
-  setCurrent(id: number) {
+
+  public getMatch(id: number): Match {
     const curr = this.matches.filter((match) => {
       return match.id === id;
     });
-    this.currentMatch = curr[0];
-  }
-  getCurrent(): Match {
-    return this.currentMatch;
+    return curr[0];
   }
 
   public updateMatch(match: Match, id: number) {

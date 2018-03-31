@@ -20,22 +20,23 @@ export class EditMatchComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private apiService: ApiService,
     private _location: Location, private route: ActivatedRoute) {
-    // Form for editing existing match
-    this.editForm = this.formBuilder.group({
-      homeTeam: new FormControl(apiService.getCurrent().homeTeam, Validators.required),
-      awayTeam: new FormControl(apiService.getCurrent().awayTeam, Validators.required),
-      sport: new FormControl(apiService.getCurrent().sport, Validators.required),
-      tournament: new FormControl(apiService.getCurrent().tournament, Validators.required),
-      category: new FormControl(apiService.getCurrent().category, Validators.required),
-      finalResultHome: new FormControl(apiService.getCurrent().finalResultHome, Validators.required),
-      finalResultAway: new FormControl(apiService.getCurrent().finalResultAway, Validators.required),
-    });
   }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = +params['id'];
-   });
+    });
+    const match: Match = this.apiService.getMatch(this.id);
+    // Form for editing existing match
+    this.editForm = this.formBuilder.group({
+      homeTeam: new FormControl(match.homeTeam, Validators.required),
+      awayTeam: new FormControl(match.awayTeam, Validators.required),
+      sport: new FormControl(match.sport, Validators.required),
+      tournament: new FormControl(match.tournament, Validators.required),
+      category: new FormControl(match.category, Validators.required),
+      finalResultHome: new FormControl(match.finalResultHome, Validators.required),
+      finalResultAway: new FormControl(match.finalResultAway, Validators.required),
+    });
   }
 
   onSubmit() {
