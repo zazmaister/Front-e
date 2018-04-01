@@ -17,6 +17,45 @@ export class ApiService {
   constructor(private http: Http) {
   }
 
+  public setMatches(matches: Match[]): void {
+    this.matches = matches;
+  }
+
+  public getMatches(): Match[] {
+    return this.matches;
+  }
+
+  public getMatch(id: number): Match {
+    const curr = this.matches.filter((match) => {
+      return match.id === id;
+    });
+    return curr[0];
+  }
+
+  public updateMatch(match: Match, id: number) {
+    this.currentMatch = match;
+    const index = this.matches.findIndex(m => m.id === id);
+
+    this.matches[index] = Object.assign({}, this.matches[index], match);
+  }
+
+  private getPeriods(periods: any): number[][] {
+    const resultByPeriods = [];
+    let sumHomePeriods = 0;
+    let sumAwayPeriods = 0;
+    Object.keys(periods).forEach((key, index) => {
+      if ( key === 'ft' ) {
+        resultByPeriods[index] = [periods.ft.home - sumHomePeriods, periods.ft.away - sumAwayPeriods];
+      } else {
+        sumHomePeriods += periods[key].home;
+        sumAwayPeriods += periods[key].away;
+        resultByPeriods[index] = [periods[key].home, periods[key].away];
+      }
+    });
+    return resultByPeriods;
+  }
+
+
   get20Matches(): Observable<Match[]> {
     return this.http.get(this._getURL)
       .map((response: Response) => {
@@ -66,43 +105,4 @@ export class ApiService {
   private handleError(error: Response) {
     return Observable.throw(error);
   }
-
-  private getPeriods(periods: any): number[][] {
-    const resultByPeriods = [];
-    let sumHomePeriods = 0;
-    let sumAwayPeriods = 0;
-    Object.keys(periods).forEach((key, index) => {
-      if ( key === 'ft' ) {
-        resultByPeriods[index] = [periods.ft.home - sumHomePeriods, periods.ft.away - sumAwayPeriods];
-      } else {
-        sumHomePeriods += periods[key].home;
-        sumAwayPeriods += periods[key].away;
-        resultByPeriods[index] = [periods[key].home, periods[key].away];
-      }
-    });
-    return resultByPeriods;
-  }
-
-  public setMatches(matches: Match[]): void {
-    this.matches = matches;
-  }
-
-  public getMatches(): Match[] {
-    return this.matches;
-  }
-
-  public getMatch(id: number): Match {
-    const curr = this.matches.filter((match) => {
-      return match.id === id;
-    });
-    return curr[0];
-  }
-
-  public updateMatch(match: Match, id: number) {
-    this.currentMatch = match;
-    const index = this.matches.findIndex(m => m.id === id);
-
-    this.matches[index] = Object.assign({}, this.matches[index], match);
-  }
-
 }
